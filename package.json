@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/jvprofits28/employeer_tracker_21#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "inquirer": "^8.0.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
   }
 }
