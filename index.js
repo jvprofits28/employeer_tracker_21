@@ -84,23 +84,23 @@ const addEmployee = () => {
     .prompt([
       {
         type: "input",
-        name: "firstName",
         message: "Whats the first name of the Employee?",
+        name: "firstName",
       },
       {
         type: "input",
-        name: "lastName",
         message: "Whats the last name?",
+        name: "lastName",
       },
       {
         type: "input",
-        name: "role",
         message: "Enter the Employee's role id",
+        name: "role",
       },
       {
         type: "input",
-        name: "managerID",
         message: "Enter the Employee's manager id",
+        name: "managerID",
       },
     ])
     .then((answers) => {
@@ -173,7 +173,8 @@ const deleteDepartment = () => {
     .prompt([
       {
         type: "input",
-        message: "which department id would you like to delete?",
+        message:
+          "which department id would you like to delete (please provide id)?",
         name: "deleteDepartment",
       },
     ])
