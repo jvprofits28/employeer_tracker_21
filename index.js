@@ -71,7 +71,7 @@ const startQuestions = () => {
           updateRole();
           break;
         case "Quit":
-          console.log("Here is your new team");
+          console.log("Thank you come back soon!");
           connection.end();
         default:
           break;
@@ -99,7 +99,7 @@ const addEmployee = () => {
       },
       {
         type: "input",
-        name: "managerid",
+        name: "managerID",
         message: "Enter the Employee's manager id",
       },
     ])
@@ -110,7 +110,7 @@ const addEmployee = () => {
           first_name: answers.firstName,
           last_name: answers.lastName,
           role_id: answers.role,
-          manager_id: answers.managerid,
+          manager_id: answers.managerID,
         },
         (err, res) => {
           if (err) throw err;
@@ -125,7 +125,7 @@ const deleteEmployee = () => {
     .prompt([
       {
         type: "input",
-        message: "which employee id would you like to delete?",
+        message: "which employee would you like to delete(please provide id)?",
         name: "deleteEmployee",
       },
     ])
@@ -196,35 +196,24 @@ const addRole = () => {
     .prompt([
       {
         type: "input",
-        message: "What is the employee's first name?",
-        name: "firstName",
+        message: "What is the name of the role to add?",
+        name: "title",
       },
       {
         type: "input",
-        message: "What is the employee's last name?",
-        name: "lastName",
+        message: "What is the salary for this position ?",
+        name: "salary",
       },
       {
-        type: "list",
-        message: "What is the employee's role",
-        choices: [
-          "Sales Associate",
-          "Stock Supervisor",
-          "Floor Supervisor",
-          "Assistant Manager",
-          "General Manager",
-        ],
-        name: "role",
+        type: "input",
+        message: "What is the department id for this role",
+        name: "departmentID",
       },
     ])
     .then((answers) => {
       connection.query(
-        "INSERT INTO role SET ?",
-        {
-          first_name: answers.firstName,
-          last_name: answers.lastName,
-          role: answers.role,
-        },
+        "INSERT INTO role SET title = ?, salary = ?, department_id = ?",
+        answers.role,
         (err, res) => {
           if (err) throw err;
           console.table(res);
@@ -239,18 +228,21 @@ const updateRole = () => {
     .prompt([
       {
         type: "input",
-        message: "Which employee's role would you like to update",
+        message: "Whats the first name of the employee?",
         name: "name",
       },
       {
         type: "input",
-        message: "What should the role be updated to",
+        message: "What should the role be updated to (please provide role id)?",
         name: "role",
       },
     ])
     .then((answers) => {
       connection.query(
-        "UPDATE employee SET role_id = ?  WHERE id = ?;",
+        `UPDATE role, employee 
+        SET title = ? 
+        WHERE employee.first_name = ? 
+        AND role.id = employee.id`,
         [answers.role, answers.name],
         (err, res) => {
           if (err) throw err;
