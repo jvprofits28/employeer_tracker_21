@@ -173,8 +173,7 @@ const deleteDepartment = () => {
     .prompt([
       {
         type: "input",
-        message:
-          "which department id would you like to delete (please provide id)?",
+        message: "which department id would you like to delete?",
         name: "deleteDepartment",
       },
     ])
@@ -207,14 +206,14 @@ const addRole = () => {
       },
       {
         type: "input",
-        message: "What is the department id for this role",
-        name: "departmentID",
+        message: "What is the department id for this role?",
+        name: "department",
       },
     ])
     .then((answers) => {
       connection.query(
         "INSERT INTO role SET title = ?, salary = ?, department_id = ?",
-        answers.role,
+        [answers.title, answers.salary, answers.department],
         (err, res) => {
           if (err) throw err;
           console.table(res);
@@ -265,8 +264,7 @@ const showRoles = () => {
 const showEmployees = () => {
   console.log("Showing all employees...\n");
   connection.query(
-    `
-  SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department_name, role.salary 
+    `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department_name, role.salary 
   FROM employee 
   JOIN role 
   ON role.id = employee.role_id 
