@@ -17,7 +17,7 @@ npm install inquirer and npm install my sql
 
 ## Usage
 
-video will be added soon
+In this video you can see an app demo https://drive.google.com/file/d/1sl6UOC16NDj3pCgvsJCphQMR9H70hcA4/view?usp=sharing
 
 ## License
 

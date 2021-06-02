@@ -183,8 +183,6 @@ const deleteDepartment = () => {
         answers.deleteDepartment,
         (err, res) => {
           if (err) throw err;
-          showDepartment();
-          console.log("\n");
           startQuestions();
         }
       );
@@ -262,7 +260,6 @@ const showRoles = () => {
 };
 
 const showEmployees = () => {
-  console.log("Showing all employees...\n");
   connection.query(
     `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department_name, role.salary 
   FROM employee 
@@ -281,7 +278,6 @@ const showEmployees = () => {
 const showDepartment = () => {
   connection.query("SELECT * FROM department", (err, res) => {
     if (err) throw err;
-    console.log("\n");
     console.table(res);
   });
   startQuestions();
